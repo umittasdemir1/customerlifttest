@@ -1,30 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Müşteri Analiz Paneli</title>
+    <title>Customer Lift Analizi</title>
 </head>
 <body>
-  <h2>Excel Dosyanızı Yükleyin</h2>
-  <form action="/analyze" method="post" enctype="multipart/form-data">
-    <label>Excel Dosyası:</label>
-    <input type="file" name="file" required><br><br>
+    <h1>Müşteri Lift ve Satış Analizi</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Excel Dosyası Yükle (xlsx):</label>
+        <input type="file" name="file" required>
+        <button type="submit">Analiz Et</button>
+    </form>
 
-    <label>Analiz Türü:</label>
-    <select name="analysis">
-      <option value="sales">Ürün Satış Analizi</option>
-      <option value="lift">Lift Analizi</option>
-      <option value="pair">Birlikte Satılan Ürünler</option>
-      <option value="time">Zaman Bazlı Satış</option>
-      <option value="customer">Müşteri Tipi</option>
-    </select><br><br>
+    {% if result %}
+        <h2>Ürün Satış Analizi</h2>
+        {{ group_html|safe }}
 
-    <label>Ürün 1 (sadece Lift için):</label>
-    <input type="text" name="urun1"><br>
-
-    <label>Ürün 2 (sadece Lift için):</label>
-    <input type="text" name="urun2"><br><br>
-
-    <button type="submit">Analizi Başlat</button>
-  </form>
+        <h2>Birlikte En Çok Satılan Ürünler (Sepet Analizi)</h2>
+        {{ lift_html|safe }}
+    {% endif %}
 </body>
 </html>
